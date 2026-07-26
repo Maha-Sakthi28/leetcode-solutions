@@ -1,0 +1,34 @@
+import java.util.Arrays;
+class Solution {
+    
+    public int thirdMax(int[] nums) {
+        int write = 0;
+        int read = 1;
+
+        for(int i=0;i<nums.length;i++){
+            for(int j=0;j<nums.length-1-i;j++){
+                if(nums[j]>nums[j+1]){
+                    int t=nums[j];
+                    nums[j]=nums[j+1];
+                    nums[j+1]=t;
+                }
+            }
+        }
+        while(read < nums.length){
+            if(nums[write] == nums[read]){
+                read++;
+            }
+            else{
+                write++;
+                nums[write]=nums[read];
+                read++;
+            }
+        }
+        int size = write + 1;
+        if(size < 3){
+        return nums[size - 1];
+    }
+
+    return nums[size - 3];
+    }     
+}
